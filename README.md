@@ -73,18 +73,18 @@ After a successful run, go to your web browser and paste the following urls:
 localhost
 ```
 
-![localhost](./images/localhost.png)
+![http://localhost](./images/localhost.png)
 
 ```sh
 db.localhost
 ```
 
-![db.localhost](./images/db.localhost.png)
+![http://db.localhost](./images/db.localhost.png)
 
 ```sh
 proxy.localhost
 ```
 
-![proxy.localhost](./images/proxy.localhost.png)
+![http://proxy.localhost](./images/proxy.localhost.png)
 
 –**Note**: The login details can be found in the `.env` file in the `backend` directory.–
