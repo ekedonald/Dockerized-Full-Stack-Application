@@ -25,11 +25,11 @@ After completing the steps above, the following steps are taken to dockerize the
 
 ### Step 1: Build a Frontend Image in the `frontend` Directory
 
-- Write a Dockerfile that contains all the **Node** dependencies and executables needed to install and run the **React** frontend.
+- Write a `Dockerfile` that contains all the **Node** dependencies and executables needed to install and run the **React** frontend.
 
 ### Step 2: Build a Backend Image in the `backend` Directory
 
-- Write a Dockerfile that contains all the **Python Poetry** dependencies and executables needed run the **FastAPI** backend.
+- Write a `Dockerfile` that contains all the **Python Poetry** dependencies and executables needed run the **FastAPI** backend.
 
 - Make the necessary changes in the `.env` files which will be referenced by `docker-compose` to build the application.
 
