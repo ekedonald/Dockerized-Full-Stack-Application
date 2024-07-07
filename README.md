@@ -18,7 +18,6 @@ To get started with this template, please follow the instructions in the respect
 - [Frontend README](./frontend/README.md)
 - [Backend README](./backend/README.md)
 
-
 ## Implementation of the Dockerized Full Stack Web Application Deployment
 
 After completing the steps above, the following steps are taken to dockerize the application:
@@ -83,4 +82,4 @@ http://proxy.localhost
 
 ![proxy.localhost](./images/proxy.localhost.png)
 
-**Note**: The login details can be found in the `.env` file in the `backend` directory.–
+_**Note**: The login details can be found in the `.env` file in the `backend` directory._
