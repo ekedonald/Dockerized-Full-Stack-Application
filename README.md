@@ -70,21 +70,21 @@ docker-compose up -d
 After a successful run, go to your web browser and paste the following urls:
 
 ```sh
-localhost
+http://localhost
 ```
 
-![http://localhost](./images/localhost.png)
+![localhost](./images/localhost.png)
 
 ```sh
-db.localhost
+http://db.localhost
 ```
 
-![http://db.localhost](./images/db.localhost.png)
+![db.localhost](./images/db.localhost.png)
 
 ```sh
-proxy.localhost
+http://proxy.localhost
 ```
 
-![http://proxy.localhost](./images/proxy.localhost.png)
+![proxy.localhost](./images/proxy.localhost.png)
 
-–**Note**: The login details can be found in the `.env` file in the `backend` directory.–
+**Note**: The login details can be found in the `.env` file in the `backend` directory.–
