@@ -143,7 +143,7 @@ git clone <dockerized-full-stack-application-url>
 
 - Copy the 4 values of **NS Records** in the hosted zone and paste them on the **DNS Nameserver Records** on the Web Hosting platform your domain was purchased.
 
-- On the newly created hosted zone, create `A Record` for each subdomain routing to the **Public IPv4 Address** of the EC2 Instance:
+- On the newly created hosted zone, create `A Record` for each subdomain routing to the **Public IPv4 Address** of the `EC2 Instance`:
     1. yourdomain.com
     2. www.yourdomain.com
     3. db.yourdomain.com
