@@ -26,9 +26,95 @@ After completing the steps above, the following steps are taken to dockerize the
 
 - Write a `Dockerfile` that contains all the **Node** dependencies and executables needed to install and run the **React** frontend.
 
+```sh
+# Stage 1: Build the React app
+FROM node:18 AS build
+
+ARG VITE_API_URL=http://localhost:8000
+
+ENV VITE_API_URL=$VITE_API_URL
+
+# Set the working directory inside the container
+WORKDIR /app
+
+# Copy the package.json and package-lock.json to the working directory
+COPY package*.json .
+
+# Install dependencies
+RUN npm install
+
+# Copy the rest of the application code to the working directory
+COPY . .
+
+RUN npm install -g typescript
+
+# Build the React app for production
+RUN npm run build
+
+# Check the output of the build step
+RUN echo "Build output:" && npm run build
+
+# Check the contents of the /app directory
+RUN echo "Contents of /app:" && ls -la /app
+
+# Check the contents of the build directory
+RUN echo "Contents of /app/build:" && ls -la /app/dist
+
+# Stage 2: Serve the React app with Nginx
+FROM nginx:alpine
+
+# Copy the built React app from the previous stage to the nginx web root
+COPY --from=build /app/dist /usr/share/nginx/html
+
+# Expose port 80
+EXPOSE 80
+
+# Start the nginx server
+CMD ["nginx", "-g", "daemon off;"]
+```
+
 ### Step 2: Build a Backend Image in the `backend` Directory
 
 - Write a `Dockerfile` that contains all the **Python Poetry** dependencies and executables needed run the **FastAPI** backend.
+
+```sh
+FROM python:3.10-slim
+
+USER root
+
+WORKDIR /app
+
+# Install necessary packages
+RUN apt-get update && apt-get install -y curl wait-for-it
+
+# Install Poetry
+RUN curl -sSL https://install.python-poetry.org | python3 -
+
+# Set environment variables for Poetry
+ENV PATH="/root/.local/bin:$PATH"
+ENV DB_HOST=database
+ENV DB_PORT=5432
+
+# Copy only the necessary files first to leverage Docker cache
+COPY pyproject.toml poetry.lock /app/
+
+# Install project dependencies
+RUN poetry install
+
+# Copy the rest of the application files
+COPY . /app
+
+ENV PYTHONPATH=/app
+
+# Copy the prestart script
+COPY prestart.sh /app/prestart.sh
+RUN chmod +x /app/prestart.sh
+
+# Command to run the application
+CMD cd /app && \
+    wait-for-it ${DB_HOST}:${DB_PORT} -- poetry run bash ./prestart.sh && \
+    poetry run uvicorn app.main:app --host 0.0.0.0 --port 8000
+```
 
 - Make the necessary changes in the `.env` files which will be referenced by `docker-compose` to build the application.
 
