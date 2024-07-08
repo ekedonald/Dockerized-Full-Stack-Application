@@ -149,6 +149,8 @@ The following steps are taken to configure the `docker-compose.yaml` file:
 
 - Configure **Adminer** to run on `port 8080`, ensure it is accessible via the subdomain `db.domain` and properly connected to the **PostgresSQL** database.
 
+_The final configuration of the [docker-compose.yaml](./docker-compose.yaml) file_.
+
 ### Step 4: Build and Run the Containerized Application
 
 - Run the following command to build and the run the application:
