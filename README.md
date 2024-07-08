@@ -73,6 +73,12 @@ EXPOSE 80
 CMD ["nginx", "-g", "daemon off;"]
 ```
 
+- Test if the image can build successfully by running the command below:
+
+```sh
+docker build -t <image_name> .
+```
+
 ### Step 2: Build a Backend Image in the `backend` Directory
 
 - Write a `Dockerfile` that contains all the **Python Poetry** dependencies and executables needed run the **FastAPI** backend.
@@ -116,13 +122,19 @@ CMD cd /app && \
     poetry run uvicorn app.main:app --host 0.0.0.0 --port 8000
 ```
 
+- Test if the image can build successfully by running the command below:
+
+```sh
+docker build -t <image_name> .
+```
+
 - Make the necessary changes in the `.env` files which will be referenced by `docker-compose` to build the application.
 
 ### Step 3: Create and Configure the `docker-compose.yaml` file
 
 The following steps are taken to configure the `docker-compose.yaml` file:
 
-- Reference the ockerfiles created in the `backend` and `frontend `directories to run as containers for the **backend** and **frontend** services respectively.
+- Reference the Dockerfiles created in the `backend` and `frontend `directories to run as containers for the **backend** and **frontend** services respectively.
 
 - Configure the **PostgresSQL** database as a container and ensure it is properly connected to the `backend` service.
 
